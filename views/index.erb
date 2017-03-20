@@ -1,0 +1,11 @@
+
+<ul>
+  <% @sorted_groups.each_with_index do |sg, index| %>
+    <li> Group <%= index + 1 %> </li>
+    <ul>
+      <% sg.each do |student| %>
+        <li><%= student %> </li>
+        <% end %>
+    </ul>
+    <% end %>
+</ul>
