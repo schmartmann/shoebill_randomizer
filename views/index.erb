@@ -1,18 +1,22 @@
-<div class="header">
-  <h1>
-    WDI SHOEBILL
-  </h1>
-</div>
+<h1>
+  wdi shoebill:
+</h1>
+
+<h5>
+  find your flock.
+</h5>
 
 <div class="groups">
-  <ul>
     <% @sorted_groups.each_with_index do |sg, index| %>
-      <li> Group <%= index + 1 %>: </li>
-      <ul>
+    <div class="group">
+      <h4>
+          Flock <%= index + 1 %>:
+      </h4>
+      <div class="students">
         <% sg.each do |student| %>
-          <li><%= student %> </li>
+          <p><%= student %></p>
           <% end %>
-      </ul>
-      <% end %>
-  </ul>
+      </div>
+    </div>
+    <% end %>
 </div>
