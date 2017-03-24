@@ -1,57 +1,66 @@
 module Sinatra
   class Server < Sinatra::Base
-    get "/" do
-      def break_into_groups (students, subgroups, maxsize)
-        sorted_groups = []
 
-        subgroups.times do
-          sorted_groups.push([])
-        end
-
-        students.shuffle!
-
-        sorted_groups.each do |subgroup|
-          students.each do |student|
-            # see if the student is already in this group and check to make sure group isn't full
-            if subgroup.include?(student) == false && subgroup.length <= maxsize
-              subgroup.push(student)
-              students.delete(student)
-            else
-              next
+    def break_into_groups(students, groupsize)
+      if groupsize.to_i <= 0
+        raise ArgumentError,
+          "Groupsize must be a positive integer, was #{groupsize.inspect}"
+      end
+      students.shuffle!
+      @sorted_groups = students.each_slice(groupsize).to_a
+      @sorted_groups.each_with_index do |gr,i|
+        if @sorted_groups[ i + 1]
+          if @sorted_groups[i].length > @sorted_groups[ i + 1].length
+            @sorted_groups[i + 1].each do |sg|
+              @sorted_groups[rand(@sorted_groups.length)].push(sg)
+              @sorted_groups[i + 1].delete(sg)
+            end
+          end
+        else
+          if @sorted_groups[i].length < @sorted_groups[i - 1].length
+            @sorted_groups[i].each do |sg|
+              @sorted_groups[rand(@sorted_groups.length)].push(sg)
+              @sorted_groups[i].delete(sg)
             end
           end
         end
+        if gr.length < 1
+          @sorted_groups.delete(gr)
+        end
       end
+    end
 
-      students = [
-        "Laura Amaya Castano",
-        "Mohammad Chughtai",
-        "Stacey Stewart",
-        "Brooklyne Finni",
-        "Benjamin de Jesus",
-        "khem Marriott",
-        "Erin Fox",
-        "Adam Roberts",
-        "Barry Levy",
-        "Danilo Marichal",
-        "Artur Lan",
-        "Nigel Gardner",
-        "Maria Sylla",
-        "Elizabeth Rodriguez",
-        "Scott Kaplan",
-        "Jessica Hirsch",
-        "Chelsea Dowling",
-        "Shannon Roberts",
-        "Raymond Hendricks",
-        "Ali Weinberg",
-        "Luke Pate",
-        "Kristyn Ginski",
-        "Craig Dempsey"
-        ]
+    students =
+      [
+      "Laura Amaya Castano",
+      "Mohammad Chughtai",
+      "Stacey Stewart",
+      "Brooklyne Finni",
+      "Benjamin de Jesus",
+      "khem Marriott",
+      "Erin Fox",
+      "Adam Roberts",
+      "Barry Levy",
+      "Danilo Marichal",
+      "Artur Lan",
+      "Nigel Gardner",
+      "Maria Sylla",
+      "Elizabeth Rodriguez",
+      "Scott Kaplan",
+      "Jessica Hirsch",
+      "Chelsea Dowling",
+      "Shannon Roberts",
+      "Raymond Hendricks",
+      "Ali Weinberg",
+      "Luke Pate",
+      "Kristyn Ginski",
+      "Craig Dempsey"
+      ]
 
-      @sorted_groups = break_into_groups(students, 13, 2)
-
+    get "/" do
+      @sorted_groups = break_into_groups(students, 3)
       erb :index
     end
+
   end
 end
