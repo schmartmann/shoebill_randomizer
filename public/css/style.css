@@ -1,0 +1,52 @@
+.container {
+  background: url('/img/shoebill-bird.jpg');
+  background-size: cover;
+  background-repeat: round;
+  height: 50em;
+  width: 100%;
+  margin-top: 0;
+}
+
+.header {
+  position: relative;
+  top: 5%;
+  left: 2%;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  font-family: 'Amatic SC'
+}
+
+.header h1 {
+  font-size: 100px;
+}
+
+.groups {
+  color: white;
+  font-family: 'Reenie Beanie';
+  padding: 5% auto;
+}
+
+.groups ul {
+  width: 100%;
+  font-size: 40px;
+  display: inline;
+}
+
+li {
+  text-shadow: 2px 2px black;
+}
+
+.groups ul ul {
+  font-size: 35px;
+  list-style: none;
+  display: -webkit-box;
+   display: -moz-box;
+   display: -ms-flexbox;
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-flow: row nowrap;
+   justify-content: space-around;
+   position: relative;
+   top: 5%;
+}
