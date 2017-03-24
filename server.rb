@@ -1,5 +1,6 @@
 module Sinatra
   class Server < Sinatra::Base
+    require 'byebug'
 
     def break_into_groups(students, groupsize)
       if groupsize.to_i <= 0
@@ -60,6 +61,17 @@ module Sinatra
     get "/" do
       @sorted_groups = break_into_groups(students, 3)
       erb :index
+    end
+
+    get "/:size" do
+      group_size = params["size"].to_i
+      if group_size.to_i <= 0
+        @flash = "IS THAT A JOKE? <br/>ARE YOU JOKING WITH *THIS* SHOEBILL?"
+        erb :index
+      else
+        @sorted_groups = break_into_groups(students, group_size)
+        erb :index
+      end
     end
 
   end

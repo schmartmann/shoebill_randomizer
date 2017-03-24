@@ -1,22 +1,31 @@
-<h1>
-  wdi shoebill:
-</h1>
+<% if @flash %>
+  <h1>
+    <%= @flash %>
+  </h1>
+<% else %>
+  <h1>
+    wdi shoebill:
+  </h1>
 
-<h5>
-  find your flock.
-</h5>
+  <h5>
+    find your flock.
+  </h5>
 
-<div class="groups">
-    <% @sorted_groups.each_with_index do |sg, index| %>
-    <div class="group">
-      <h4>
-          Flock <%= index + 1 %>:
-      </h4>
-      <div class="students">
-        <% sg.each do |student| %>
-          <p><%= student %></p>
-          <% end %>
-      </div>
-    </div>
+  <div class="groups">
+    <% if @sorted_groups %>
+        <% @sorted_groups.each_with_index do |sg, index| %>
+        <div class="group">
+          <h4>
+              Flock <%= index + 1 %>:
+          </h4>
+          <div class="students">
+            <% sg.each do |student| %>
+              <p><%= student %></p>
+              <% end %>
+          </div>
+        </div>
+        <% end %>
     <% end %>
-</div>
+  </div>
+
+<% end %>
