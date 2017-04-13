@@ -34,7 +34,7 @@ module Sinatra
     students =
       [
       "Laura Amaya Castano",
-      "Mohammad Chughtai",
+      #"Mohammad Chughtai",
       "Stacey Stewart",
       "Brooklyne Finni",
       "Benjamin de Jesus",
